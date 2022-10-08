@@ -1,0 +1,72 @@
+{% extends 'v_owner_home.html' %}
+
+{% block content %}
+<style>
+    hr.style-eight {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr.style-eight:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+</style>
+
+<br>
+<hr class="style-eight">
+<br>
+
+
+    <div style="text-align: center; margin-left: 25%;">
+        <table style="border: 1; width: 75%;">
+            <tr style="background-color: white; text-align: center;">
+                <th>Customer Name</th>
+                <th>Vehicle Type</th>
+                <th>Vehicle Name</th>                
+                <th>Capacity</th>
+                <th>Vehicle Number</th> 
+                <th>Rent(Rs.)/day</th>  
+                <th>#Days</th>  
+                <th>Total Rent(Rs.)</th> 
+              
+            </tr>            
+            
+            {% for order in orders %}
+            
+                <tr style="background-color: lightblue; text-align: center;">
+                    <td>{{order.customer_name}}</td>
+                    <td>{{order.vehicle_type}}</td>
+                    <td>{{order.vehiclename}}</td>
+                    <td>{{order.capacity}}</td>
+                    <td>{{order.vehicleno}}</td> 
+                    <td>{{order.rentperday}}</td>
+                    <td>{{order.days}}</td>
+                    <td>{{order.totalrent}}</td>
+
+                </tr>            
+            
+                {% empty %}
+                <h3 style="text-align: center;"><u>No Records Found...!!!</u></h3>
+              
+            {% endfor %}
+            
+        </table>            
+    </div> 
+
+    <br>    
+<hr class="style-eight">
+
+{% endblock %}
+
+
+

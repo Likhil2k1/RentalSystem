@@ -1,0 +1,141 @@
+{% extends 'v_customer_home.html' %}
+
+<h1>HELLO</h1>
+{{ vehicles.count }}
+
+{% block content %}
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+            position: relative;
+            margin-left: 0px;
+            
+        }
+        
+        .price {
+            color: grey;
+            font-size: 22px;
+        }
+        
+        .card button {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        .card input[type=submit] {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        
+        
+
+        .card input[type=number] {
+            width: 100%;
+            display: inline-block;
+            outline: 0;
+            text-align: center;
+            border: solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+
+            }
+        .card button:hover {
+            opacity: 0.7;
+        }
+    </style>
+
+    
+    {% for vehicle, ownr in mylist %}
+    <div style="padding-left: 10%; padding-right: 10%;">
+        <div class="card">
+            <!--<img src="/{{house.image1.url}}" alt="Image1" style="width:100%">-->
+            <table>
+                <tr>
+                    <td><img src="/{{vehicle.image1.url}}" alt="Image1" style="width:100%"></td>
+                    <td><img src="/{{vehicle.image2.url}}" alt="Image2" style="width:100%"></td>
+                    <td><img src="/{{vehicle.image3.url}}" alt="Image3" style="width:100%"></td>
+                </tr>
+            </table>
+            <h1>{{vehicle.vehiclename}}</h1>
+            <p class="price">₹ {{vehicle.rent}} <span style="font-size: 60%">/day</span></p>
+            <table>
+                <tr>
+                    <td><p><strong>Vehicle Type </strong></td>
+                    <td><p> {{vehicle.type}}</p></td>
+                </tr>
+                <tr>
+                    <td><p><strong>Vehicle Number </strong></td>
+                    <td><p> {{vehicle.vehicleno}}</p></td>
+                </tr>
+                <tr>
+                    <td><p><strong>Capacity </strong></td>
+                    <td><p> {{vehicle.capacity}}</p></td>
+                </tr>
+                <tr>
+                    <td><p><strong>Description </strong></td>
+                    <td><p> {{vehicle.description}}</p></td>
+                </tr>
+                
+                
+                <tr>
+                    <td><p><strong>Owner </strong></td>
+                    <td><p> {{vehicle.owner_name}}</p> </td>
+                </tr>
+                <tr>
+                    <td><p><strong>Owner Mobile </strong></td>
+                    <td><p> {{ownr.mobileno}}</p> </td>
+                </tr>
+            </table>
+            
+            <form method="post" action="/vehicles/v_confirm/">
+                {% csrf_token %}
+                <input type="hidden" name="rentperday" value="{{vehicle.rent}}">
+                
+                <input type="hidden" name="vehicleno" value="{{vehicle.vehicleno}}">
+                <input type="hidden" name="owner_name" value="{{vehicle.owner_name}}">
+                <input type="hidden" name="customer_name" value="{{username}}">
+                
+                <table>
+                    <tr>
+                        <td style="width: 658.4px;"><p><strong>Enter # days to rent</strong></p></td>
+                        <td><p><input type="number" name="days" required></p></td>
+                    </tr>
+                </table>
+                
+                <input type="submit" value="Confirm">
+              </form>
+        </div>
+    </div>
+    {% endfor %}
+
+
+    <br>
+<hr class="style-eight">
+
+    <div class="wrapper row6">
+      
+        <div id="copyright" class="hoc clear">
+          
+            <p class="fl_left">Copyright &copy; 2021 - All Rights Reserved </p>
+            <p class="fl_right">RENTAL WORLD</p>     </div>   </div>
+      </div>
+      <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+      
+{% endblock %}
+

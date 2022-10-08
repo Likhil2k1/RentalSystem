@@ -1,0 +1,85 @@
+{% extends 'v_customer_home.html' %}
+
+{% block content %}
+<style>
+    hr.style-eight {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr.style-eight:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+</style>
+
+
+
+    <div style="text-align: center; margin-left: 25%;">
+        <table style="border: 1; width: 75%;">
+            <tr style="background-color: white; text-align: center;">
+                <th>Vehicle Type</th>
+                <th>Vehicle Name</th>                
+                <th>Capacity</th>
+                <th>Vehicle Number</th>                
+                <th>Owner Name</th>
+                <th>Owner Mobile</th> 
+                <th>Rent(Rs.)/day</th>  
+                <th>#Days</th>  
+                <th>Total Rent(Rs.)</th>  
+                             
+            </tr>            
+            
+            {% for order in orders %}
+            
+                <tr style="background-color: lightblue; text-align: center;">
+                    <td>{{order.vehicle_type}}</td>
+                    <td>{{order.vehiclename}}</td>
+                    <td>{{order.capacity}}</td>
+                    <td>{{order.vehicleno}}</td> 
+                    <td>{{order.owner_name}}</td>
+                    <td>{{order.owner_mobile}}</td>
+                    
+                                  
+                    <!--
+                    <td><img src=/{{house.image1.url}} alt="XXX"></td>
+                    <td><img src=/{{house.image2.url}}  width=80 height=80 alt="XXX"></td>
+                    <td><img src=/{{house.image3.url}}  width=80 height=80 alt="XXX"></td>
+                    -->
+                    
+                    <td>{{order.rentperday}}</td>
+                    <td>{{order.days}}</td>
+                    <td>{{order.totalrent}}</td>
+                </tr>            
+            
+                {% empty %}
+                <h3 style="text-align: center;"><u>No Records Found...!!!</u></h3>
+              
+            {% endfor %}
+            
+        </table>            
+    </div>
+
+    <br>
+<hr class="style-eight">
+
+<div class="wrapper row6">
+      
+    <div id="copyright" class="hoc clear">
+      
+        <p class="fl_left">Copyright &copy; 2021 - All Rights Reserved </p>
+        <p class="fl_right">RENTAL WORLD</p>     </div> </div>
+  </div>
+  <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+  
+{% endblock %}
+

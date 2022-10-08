@@ -1,0 +1,111 @@
+{% extends 'v_customer_home.html' %}
+
+<h1>HELLO</h1>
+{{ vehicles.count }}
+
+
+{% block content %}
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+            position: relative;
+            float: left;
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+        
+        .price {
+            color: grey;
+            font-size: 22px;
+        }
+        
+        .card button {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        
+        .card button:hover {
+            opacity: 0.7;
+        }
+
+        .card input[type=submit] {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+    </style>
+    
+    <br>
+    <div style="margin-left: 150px;">
+        <h2><strong>YOUR SEARCH RESULTS:</strong></h2>
+    </div>
+    <br>
+    
+    {% for vehicle in vehicles %}
+    <div style="margin-left: 150px;">
+        <div class="card">
+            <img src="{{vehicle.image1.url}}" alt="Vehicle" style="width:100%">
+            <h1>{{vehicle.name}}</h1>
+            <p class="price">₹ {{vehicle.rent}} <span style="font-size: 60%">/day</span></p>
+            <table>
+                <tr>
+                    <td><p><strong>Owner </strong></td>
+                    <td><p> {{vehicle.owner_name}}</p> </td>
+                </tr>
+                <tr>
+                    <td><p><strong>Vehicle Number </strong></td>
+                    <td><p> {{vehicle.vehicleno}}</p></td>
+                </tr>
+                <tr>
+                    <td><p><strong>Capacity </strong></td>
+                    <td><p> {{vehicle.capacity}}</p></td>
+                </tr>
+                <tr>
+                    <td><p><strong>Description </strong></td>
+                    <td><p> {{vehicle.description}} </p></td>
+                </tr>
+            </table>
+            <form method="post" action="/vehicles/v_customer_rentvehicle/">
+                {% csrf_token %}
+                <input type="hidden" name="vehicleno" value="{{vehicle.vehicleno}}">
+                <input type="hidden" name="owner_name" value="{{vehicle.owner_name}}">
+                <input type="submit" value="Proceed">
+              </form>
+        </div>
+    </div>
+        {% empty %}
+        <h3><strong>No Records Found</sr></h3>
+    {% endfor %}
+
+    
+{% endblock %}
+<br>
+<hr class="style-eight">
+
+<div class="wrapper row6">
+      
+    <div id="copyright" class="hoc clear">
+       
+      <p class="fl_left">Copyright &copy; 2021 - All Rights Reserved - <a href="#">Domain Name</a></p>
+      <p class="fl_right">Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    </div>
+  </div>
+  <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+  
